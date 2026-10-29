@@ -1,0 +1,1268 @@
+/* Draft v2. Paged layout: one view at a time, switched from the sticky nav.
+   One bold move: the plain-language "same idea, two ways" card on Home. */
+:root {
+  --page: #eceef1;
+  --sheet: #ffffff;
+  --ink: #18212f;
+  --muted: #5a6473;
+  --faint: #8a93a1;
+  --line: #d6dae0;
+  --marker: #ffe14d;
+  --deep: #0f1624;
+
+  /* Category hues. Used for icons, accent bars, dots, and chip tints, never alone for meaning */
+  --hue-rose: #d23f6d;
+  --hue-amber: #b7740f;
+  --hue-violet: #6a52dc;
+  --hue-blue: #2563d8;
+  --hue-teal: #0b8a7b;
+  --hue-slate: #5a6473;
+
+  --font-display: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --font-text: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-zh: "Noto Serif SC", "Songti SC", "SimSun", serif;
+
+  --step--1: 0.8125rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.375rem;
+  --step-2: 1.8125rem;
+  --step-3: 2.5rem;
+  --step-4: clamp(2.75rem, 6.6vw, 5.5rem);
+
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --max: 70rem;
+  --nav-h: 3.75rem;
+  --r-sm: 4px;
+
+  /* Elevation: 1 = resting surfaces (cards), 2 = featured surfaces (demo frames, the Home card) */
+  --elev-1: 0 0 0 1px var(--line), 0 1px 2px rgb(15 22 36 / 0.05);
+  --elev-2: 0 0 0 1px var(--line), 0 18px 40px -28px rgb(15 22 36 / 0.35);
+  --r-md: 10px;
+
+  /* Up-right arrow, used as a mask so it takes the link's color in both themes */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0f131a;
+    --sheet: #171d26;
+    --ink: #e7ebf1;
+    --muted: #a0a9b7;
+    --faint: #737d8c;
+    --line: #29313c;
+    --marker: #f0cf3a;
+    --deep: #080b12;
+    --hue-rose: #f0709a;
+    --hue-amber: #e3a640;
+    --hue-violet: #a294ff;
+    --hue-blue: #74a1ff;
+    --hue-teal: #3cc2ae;
+    --hue-slate: #a0a9b7;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: calc(var(--nav-h) + 1rem);
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: var(--step-0);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+img,
+iframe {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--line);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.22em;
+}
+
+a:hover {
+  text-decoration-color: var(--marker);
+}
+
+:focus-visible {
+  outline: 3px solid var(--marker);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+[lang="zh-CN"] {
+  font-family: var(--font-zh);
+}
+
+.wrap {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.skip:focus {
+  left: var(--gutter);
+  top: 0.75rem;
+  z-index: 20;
+  padding: 0.5rem 0.75rem;
+  background: var(--sheet);
+}
+
+/* Marks a fact Lanyu still has to confirm. Remove before launch. */
+.todo {
+  background: color-mix(in srgb, var(--marker) 45%, transparent);
+  outline: 1px dashed var(--muted);
+  padding: 0 0.2em;
+}
+
+/* Sticky header. The name and the pill row sit on the content edges of .wrap, so the
+   name lines up with page titles and the last pill's edge with the right column.
+   At the top it blends into the page; once scrolled it gets a hairline and a soft shadow.
+   Its own view-transition-name keeps it still while the page below cross-fades. */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--page) 86%, transparent);
+  backdrop-filter: saturate(1.4) blur(12px);
+  -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+  view-transition-name: topbar;
+}
+
+.topbar.is-scrolled {
+  background: color-mix(in srgb, var(--page) 94%, transparent);
+  border-bottom-color: var(--line);
+  box-shadow: 0 12px 24px -22px rgb(15 22 36 / 0.4);
+}
+
+.topbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  height: var(--nav-h);
+}
+
+/* 64px bar from tablet up; 60px on phones */
+@media (min-width: 48rem) {
+  :root {
+    --nav-h: 4rem;
+  }
+}
+
+.topbar__name {
+  flex: none;
+  padding-block: 0.3125rem;
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 600;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  text-decoration-thickness: 2px;
+  white-space: nowrap;
+}
+
+.topbar__name:hover {
+  text-decoration-line: underline;
+  text-decoration-color: var(--marker);
+}
+
+/* The nav may shrink and scroll only as a last resort (very narrow screens, large text);
+   the padding and matching negative margin leave room for the focus ring inside the scroll box */
+.topbar nav {
+  min-width: 0;
+}
+
+.nav {
+  display: flex;
+  gap: 0.25rem;
+  margin: -0.375rem;
+  padding: 0.375rem;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0 0.875rem;
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.nav a:hover {
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+  color: var(--ink);
+}
+
+/* Current page: the same ink pill as the selected Work tab */
+.nav a[aria-current="page"],
+.nav a[aria-current="page"]:hover {
+  background: var(--ink);
+  color: var(--page);
+}
+
+.nav a:focus-visible {
+  outline-offset: 2px;
+}
+
+/* Phones: name plus four pills fit in 343px (375 minus gutters) with room to spare */
+@media (max-width: 29.99rem) {
+  .nav a {
+    padding-inline: 0.7rem;
+  }
+}
+
+@media (max-width: 22.49rem) {
+  .topbar__name {
+    font-size: var(--step-0);
+  }
+
+  .nav {
+    gap: 0.125rem;
+  }
+
+  .nav a {
+    padding-inline: 0.55rem;
+  }
+}
+
+/* Views: without JS every view shows, one after another */
+.js .view[hidden] {
+  display: none;
+}
+
+.view {
+  padding-block: clamp(2.5rem, 7vw, 5rem) clamp(3rem, 8vw, 6rem);
+}
+
+.view__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+}
+
+.view__title:focus {
+  outline: none;
+}
+
+.view__intro {
+  max-width: 38rem;
+  margin: 0.85rem 0 0;
+  color: var(--muted);
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-group(topbar),
+  ::view-transition-old(topbar),
+  ::view-transition-new(topbar) {
+    animation-duration: 220ms;
+  }
+}
+
+/* Home */
+.home {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+@media (min-width: 62rem) {
+  .home__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 4rem;
+    align-items: end;
+  }
+}
+
+.home__title {
+  margin: 0;
+  max-width: 11em;
+  font-family: var(--font-display);
+  font-size: var(--step-4);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+
+.home__title:focus {
+  outline: none;
+}
+
+.home__lede {
+  max-width: 34rem;
+  margin: 1.5rem 0 0;
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
+.home__bio {
+  max-width: 34rem;
+  margin: 1rem 0 0;
+  color: var(--muted);
+}
+
+/* Same idea, two ways */
+.twoways {
+  margin-top: 2.5rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border-radius: var(--r-md);
+  background: var(--sheet);
+  box-shadow: var(--elev-2);
+}
+
+@media (min-width: 62rem) {
+  .twoways {
+    margin-top: 0;
+  }
+}
+
+.twoways__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+}
+
+.twoways__title {
+  margin: 0;
+  font-size: var(--step-0);
+  font-weight: 600;
+}
+
+.twoways__topic {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+.twoways__pair {
+  margin: 1.25rem 0 0;
+  transition: opacity 180ms ease;
+}
+
+.twoways__pair.is-swapping {
+  opacity: 0;
+}
+
+.twoways__pair dt {
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-weight: 500;
+}
+
+.twoways__tech {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.twoways__plain {
+  margin: 0.3rem 0 0;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.twoways__pair dd + dt {
+  margin-top: 1.1rem;
+  padding-top: 1.1rem;
+  border-top: 1px dashed var(--line);
+}
+
+.twoways__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.twoways__count {
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.05rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--page);
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: transparent;
+  color: var(--ink);
+}
+
+.button--quiet {
+  background: transparent;
+  color: var(--ink);
+}
+
+.button--quiet:hover {
+  background: var(--ink);
+  color: var(--page);
+}
+
+.reach {
+  max-width: 48rem;
+  margin: 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--line);
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
+.paths {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--line);
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+@media (min-width: 48rem) {
+  .paths {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.paths a {
+  display: block;
+  height: 100%;
+  padding: 1.4rem 1.5rem 1.6rem;
+  background: var(--sheet);
+  text-decoration: none;
+}
+
+.paths a:hover {
+  background: color-mix(in srgb, var(--sheet) 90%, var(--marker));
+}
+
+.paths strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 600;
+}
+
+.paths span {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+/* Work: sub-tabs */
+.tabs {
+  display: flex;
+  gap: 0.35rem;
+  width: fit-content;
+  max-width: 100%;
+  margin: 2rem 0 0;
+  padding: 0.3rem;
+  overflow-x: auto;
+  border-radius: 999px;
+  background: var(--sheet);
+  box-shadow: inset 0 0 0 1px var(--line);
+  scrollbar-width: none;
+}
+
+.tabs button {
+  flex: none;
+  padding: 0.5rem 1rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tabs button:hover {
+  color: var(--ink);
+}
+
+.tabs button[aria-selected="true"] {
+  background: var(--ink);
+  color: var(--page);
+}
+
+.tabs .count {
+  margin-left: 0.3rem;
+  font-weight: 500;
+  opacity: 0.6;
+}
+
+/* Four tabs need about 26rem; below 30rem they sit two by two so none is hidden off-screen */
+@media (max-width: 29.99rem) {
+  .tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    border-radius: 1.4rem;
+  }
+}
+
+.panel {
+  margin-top: 2.25rem;
+}
+
+.panel:focus {
+  outline: none;
+}
+
+.js .panel[hidden] {
+  display: none;
+}
+
+.panel__note {
+  max-width: 40rem;
+  margin: 0 0 1.75rem;
+  color: var(--muted);
+}
+
+/* Videos and Xiaohongshu: compact grids, 2 across on phones and 4 across from tablet width up */
+.videos,
+.notes {
+  display: grid;
+  gap: 1.75rem 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 48rem) {
+  .videos,
+  .notes {
+    gap: 2rem 1.25rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Titles step down to fit the narrower columns */
+.videos .item__title,
+.notes .item__title {
+  font-size: var(--step-0);
+  line-height: 1.25;
+}
+
+@media (min-width: 48rem) {
+  .videos .item__title,
+  .notes .item__title {
+    font-size: 1.2rem;
+  }
+}
+
+.cover {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  background: var(--deep);
+}
+
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 400ms ease;
+}
+
+.cover:hover img {
+  transform: scale(1.03);
+}
+
+.cover__time {
+  position: absolute;
+  right: 0.45rem;
+  bottom: 0.45rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: var(--r-sm);
+  background: rgb(0 0 0 / 0.6);
+  color: #fff;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Text that carries content uses --muted, not --faint: faint is 2.7:1 on the page grey */
+.item__zh {
+  margin: 0.95rem 0 0;
+  color: var(--muted);
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+.item__title {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 600;
+  line-height: 1.22;
+  letter-spacing: -0.005em;
+}
+
+.item__title a {
+  text-decoration: none;
+}
+
+.item__title a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--marker);
+}
+
+.item__meta {
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+.item__note {
+  margin: 0.35rem 0 0;
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+/* Xiaohongshu: a 3:4 cover with a footer strip, like the app's own note card */
+.note {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  background: var(--sheet);
+  box-shadow: var(--elev-1);
+  text-decoration: none;
+}
+
+.note img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background: var(--deep);
+  transition: transform 400ms ease;
+}
+
+/* A landscape cover is shown whole on the dark frame instead of cropped */
+.note img.is-wide {
+  object-fit: contain;
+}
+
+.note:hover img {
+  transform: scale(1.03);
+}
+
+.note__foot {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-top: 1px solid var(--line);
+  background: var(--sheet);
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+/* Articles */
+.org + .org {
+  margin-top: 3.5rem;
+}
+
+.org__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.org__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.org__what {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+.articles {
+  display: grid;
+  gap: 2rem 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+}
+
+/* Each group has 3 articles, so keep 3 across from tablet up to avoid a 2+1 orphan */
+@media (min-width: 48rem) {
+  .articles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.article__cover {
+  display: block;
+  aspect-ratio: 2.35 / 1;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  background: var(--line);
+}
+
+.article__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 400ms ease;
+}
+
+.article__cover:hover img {
+  transform: scale(1.03);
+}
+
+.more {
+  margin-top: 3rem;
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+.more summary {
+  width: fit-content;
+  cursor: pointer;
+}
+
+.more ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+}
+
+/* Posters: one even grid of 8.25rem+ columns (7 across on desktop, so 14 posters fill two rows); the source images are small, so columns stay narrow */
+.posters {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(auto-fill, minmax(min(45%, 8.25rem), 1fr));
+}
+
+.posters img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 219 / 385;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+  box-shadow: 0 1px 0 var(--line), 0 12px 24px -18px rgb(15 22 36 / 0.5);
+}
+
+/* Built */
+.project {
+  display: grid;
+  gap: 1.75rem 3rem;
+  align-items: center;
+  margin-top: 2.5rem;
+}
+
+.project + .project {
+  margin-top: clamp(3.5rem, 8vw, 5.5rem);
+}
+
+@media (min-width: 58rem) {
+  .project {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  }
+}
+
+.stage {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  background: var(--deep);
+}
+
+.stage iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* A live page shown at half size inside a plain browser frame */
+.browser {
+  overflow: hidden;
+  border-radius: var(--r-md);
+  background: var(--sheet);
+  box-shadow: var(--elev-2);
+}
+
+.browser__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--faint);
+  font-size: var(--step--1);
+}
+
+.browser__dots {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.browser__dots i {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.browser__view {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.browser__view img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.browser__view iframe {
+  position: absolute;
+  inset: 0;
+  width: 200%;
+  max-width: none;
+  height: 200%;
+  border: 0;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+}
+
+.project__kicker {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+.project__title {
+  margin: 0.3rem 0 0;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+}
+
+/* Project titles sit below the page title on phones, full size beside the demo on desktop */
+@media (min-width: 58rem) {
+  .project__title {
+    font-size: var(--step-3);
+  }
+}
+
+.project__body {
+  max-width: 34rem;
+  margin: 0.9rem 0 0;
+}
+
+.project__stack {
+  margin: 0.9rem 0 0;
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+.project__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+}
+
+.small-builds {
+  display: grid;
+  gap: 1.5rem 2rem;
+  margin: clamp(3.5rem, 8vw, 5rem) 0 0;
+  padding: 1.75rem 0 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+
+.small-builds h3 {
+  margin: 0;
+  font-size: var(--step-0);
+}
+
+.small-builds p {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+/* About: one hue per kind of thing, always paired with a text label */
+.about-sec {
+  margin-top: clamp(2.5rem, 6vw, 3.75rem);
+}
+
+.about-sec__title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 0 0 1.25rem;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.about-sec__title[data-hue]::before {
+  content: "";
+  flex: none;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--hue);
+  transform: translateY(-0.15em);
+}
+
+.about-sec__title[data-hue="edu"] { --hue: var(--hue-blue); }
+.about-sec__title[data-hue="intern"] { --hue: var(--hue-teal); }
+.about-sec__title[data-hue="project"] { --hue: var(--hue-violet); }
+.about-sec__title[data-hue="paper"] { --hue: var(--hue-amber); }
+
+.about-sec__title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+  transform: translateY(-0.3em);
+}
+
+.skillgrid {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+}
+
+.skill {
+  --hue: var(--hue-slate);
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1.25rem 1.35rem;
+  border-radius: var(--r-md);
+  background: var(--sheet);
+  box-shadow: var(--elev-1);
+}
+
+.skill--video { --hue: var(--hue-rose); }
+.skill--writing { --hue: var(--hue-amber); }
+.skill--design { --hue: var(--hue-violet); }
+.skill--web { --hue: var(--hue-blue); }
+.skill--data { --hue: var(--hue-teal); }
+.skill--lang { --hue: var(--hue-slate); }
+
+.skill__icon {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--hue) 14%, var(--sheet));
+  color: var(--hue);
+}
+
+.skill__icon svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.skill__name {
+  margin: 0.9rem 0 0;
+  font-size: var(--step-0);
+  font-weight: 700;
+}
+
+.skill__what {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+  font-size: var(--step--1);
+  line-height: 1.55;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: auto 0 0;
+  padding: 0.9rem 0 0;
+  list-style: none;
+}
+
+.chips li {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 6%, var(--sheet));
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.cards {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14.5rem), 1fr));
+}
+
+.cards--stack {
+  grid-template-columns: 1fr;
+}
+
+.card {
+  --hue: var(--hue-slate);
+  display: flex;
+  flex-direction: column;
+  padding: 1.05rem 1.2rem 1.15rem;
+  border-radius: var(--r-md);
+  background: var(--sheet);
+  box-shadow: var(--elev-1);
+}
+
+.card--edu { --hue: var(--hue-blue); }
+.card--work { --hue: var(--hue-rose); }
+.card--intern { --hue: var(--hue-teal); }
+.card--project { --hue: var(--hue-violet); }
+.card--paper { --hue: var(--hue-amber); }
+
+.card__type {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 0 0.35rem;
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.card__type::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--hue);
+}
+
+.card__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.card__role {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+/* Education and work dates sit on one line across a row, even when a name wraps */
+.card__when {
+  margin: auto 0 0;
+  padding-top: 0.5rem;
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+.card--intern .card__when,
+.card--project .card__when,
+.card--paper .card__when {
+  margin: 0 0 0.3rem;
+  padding-top: 0;
+}
+
+.about-split {
+  display: grid;
+  gap: 0 2.5rem;
+}
+
+@media (min-width: 60rem) {
+  .about-split {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Footer: email and profile links in one quiet row under every view; stacks on phones */
+.footer {
+  padding-block: 1.75rem 2.25rem;
+  border-top: 1px solid var(--line);
+  font-size: var(--step--1);
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+}
+
+.footer__email {
+  font-size: var(--step-0);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  text-decoration-color: color-mix(in srgb, var(--ink) 25%, transparent);
+}
+
+.footer__email:hover {
+  text-decoration-color: var(--marker);
+}
+
+.footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.footer__links a {
+  display: inline-block;
+  padding-block: 0.25rem;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.footer__links a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--marker);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .twoways__pair,
+  .cover img,
+  .note img,
+  .article__cover img,
+  .topbar,
+  .nav a {
+    transition: none;
+  }
+}
+
+/* Touch screens: header, footer links, and Work tabs at least 44px tall */
+@media (pointer: coarse) {
+  .tabs button {
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+
+  /* Header pills keep their 36px look; an invisible ::before makes each tap area 44px tall
+     (it stays inside the .nav padding, so the scroll box does not clip it) */
+  .nav a {
+    position: relative;
+  }
+
+  .nav a::before {
+    content: "";
+    position: absolute;
+    inset: -0.25rem 0;
+  }
+
+  .footer__email {
+    display: inline-block;
+    padding-block: 0.55rem;
+  }
+
+  .footer__links a {
+    padding-block: 0.6rem;
+  }
+}

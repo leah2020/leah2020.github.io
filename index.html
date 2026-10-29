@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lanyu Li, content and web</title>
+  <meta name="description" content="Lanyu Li explains tech in plain language: videos, social posts, articles, posters, and small web tools.">
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Noto+Serif+SC:wght@600;900&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css?v=32">
+  <script src="app.js?v=7" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <a class="topbar__name" href="#home">Lanyu Li</a>
+      <nav aria-label="Pages">
+        <ul class="nav">
+          <li><a href="#home" aria-current="page">Home</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#built">Built</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Home -->
+    <section class="view wrap" id="home" data-view="home" aria-labelledby="home-title">
+      <div class="home">
+        <div class="home__top">
+          <div>
+            <h1 class="home__title" id="home-title" tabindex="-1">I explain tech in plain language.</h1>
+            <p class="home__lede">I make app and gadget reviews on Bilibili and AI tool comparisons on RedNote, an Instagram-like social platform. I also write articles for campus groups and design poster templates for MAKA, a Canva-like design platform. Now I'm learning to build web tools, too.</p>
+            <p class="home__bio">MS in Information Systems at Northeastern University, Silicon Valley campus. Before that, three years as a fund-of-funds researcher at Huatai Securities Asset Management in Shanghai.</p>
+          </div>
+
+          <aside class="twoways" aria-labelledby="twoways-title">
+            <div class="twoways__head">
+              <h2 class="twoways__title" id="twoways-title">Same idea, two ways</h2>
+              <p class="twoways__topic" data-topic>Topic: my 3D photo album</p>
+            </div>
+            <dl class="twoways__pair" data-pair aria-live="polite">
+              <dt>Technical</dt>
+              <dd class="twoways__tech" data-tech>Hand-landmark detection maps how open your palm is to the camera's position on a 3D timeline.</dd>
+              <dt>Plain</dt>
+              <dd class="twoways__plain" data-plain>Open your hand to move forward through your photos.</dd>
+            </dl>
+            <div class="twoways__foot">
+              <span class="twoways__count" data-count>1 of 4</span>
+              <button class="button button--quiet" type="button" data-next hidden>Next example</button>
+            </div>
+          </aside>
+        </div>
+
+        <p class="reach">My Bilibili videos have 150K+ views across 23 videos. My RedNote posts have 3,399 likes and saves, and the top one has 1,215.</p>
+
+        <ul class="paths" aria-label="Where to go next">
+          <li><a href="#work"><strong>Work</strong><span>Videos, RedNote posts, WeChat articles, and poster templates. Most are in Chinese, with English summaries.</span></a></li>
+          <li><a href="#built"><strong>Built</strong><span>A gesture-controlled 3D photo album and a landing page with a request form.</span></a></li>
+          <li><a href="#about"><strong>About</strong><span>Skills for content and web work, plus internships, projects, and papers.</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Work -->
+    <section class="view wrap" id="work" data-view="work" aria-labelledby="work-title" hidden>
+      <h1 class="view__title" id="work-title" tabindex="-1">Work</h1>
+      <p class="view__intro">Most of this work is in Chinese. Each piece has an English summary and what I did.</p>
+
+      <div class="tabs" role="tablist" aria-label="Work by format">
+        <button role="tab" id="tab-videos" aria-controls="panel-videos" aria-selected="true">Videos<span class="count">4</span></button>
+        <button role="tab" id="tab-posts" aria-controls="panel-posts" aria-selected="false" tabindex="-1">RedNote<span class="count">4</span></button>
+        <button role="tab" id="tab-articles" aria-controls="panel-articles" aria-selected="false" tabindex="-1">Articles<span class="count">9</span></button>
+        <button role="tab" id="tab-posters" aria-controls="panel-posters" aria-selected="false" tabindex="-1">Posters<span class="count">14</span></button>
+      </div>
+
+      <div class="panel" role="tabpanel" id="panel-videos" aria-labelledby="tab-videos" tabindex="0">
+        <p class="panel__note">App and gadget reviews on <a href="https://space.bilibili.com/265654686" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">my Bilibili channel</a>. I plan, film, and edit them myself.</p>
+        <div class="videos">
+          <article>
+            <a class="cover" href="https://www.bilibili.com/video/BV1C7411D749" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note" aria-label="Watch the vocabulary app review on Bilibili">
+              <img src="img/bilibili/BV1C7411D749.webp" alt="" loading="lazy" width="672" height="420">
+              <span class="cover__time">6:21</span>
+            </a>
+            <p class="item__zh" lang="zh-CN">英语背单词软件哪家强？3款小众软件体验推荐</p>
+            <h3 class="item__title"><a href="https://www.bilibili.com/video/BV1C7411D749" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">Which vocabulary app is best? I tested three lesser-known ones</a></h3>
+            <p class="item__meta">64K views, March 2020</p>
+            <p class="item__note">A side-by-side test that helps viewers pick one app.</p>
+          </article>
+          <article>
+            <a class="cover" href="https://www.bilibili.com/video/BV1MV411S7AR" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note" aria-label="Watch the productivity apps video on Bilibili">
+              <img src="img/bilibili/BV1MV411S7AR.webp" alt="" loading="lazy" width="672" height="420">
+              <span class="cover__time">5:50</span>
+            </a>
+            <p class="item__zh" lang="zh-CN">8款效率工具APP，对拖延有用吗？</p>
+            <h3 class="item__title"><a href="https://www.bilibili.com/video/BV1MV411S7AR" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">Eight productivity apps for students who procrastinate</a></h3>
+            <p class="item__meta">52K views, August 2020</p>
+            <p class="item__note">Sorts eight apps into four jobs: to-dos, time, journaling, and habits.</p>
+          </article>
+          <article>
+            <a class="cover" href="https://www.bilibili.com/video/BV1Zi421e7x6" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note" aria-label="Watch the portrait camera comparison on Bilibili">
+              <img src="img/bilibili/BV1Zi421e7x6.webp" alt="" loading="lazy" width="672" height="420">
+              <span class="cover__time">6:03</span>
+            </a>
+            <p class="item__zh" lang="zh-CN">人像相机哪家强？索尼 松下 佳能 原片直出对比</p>
+            <h3 class="item__title"><a href="https://www.bilibili.com/video/BV1Zi421e7x6" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">Sony, Panasonic, or Canon for portraits?</a></h3>
+            <p class="item__meta">12K views, June 2024</p>
+            <p class="item__note">Straight-out-of-camera photos from three cameras, from a beginner's point of view.</p>
+          </article>
+          <article>
+            <a class="cover" href="https://www.bilibili.com/video/BV1A5411p7VB" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note" aria-label="Watch the handwriting comparison on Bilibili">
+              <img src="img/bilibili/BV1A5411p7VB.webp" alt="" loading="lazy" width="672" height="420">
+              <span class="cover__time">4:01</span>
+            </a>
+            <p class="item__zh" lang="zh-CN">win二合一笔记本当平板两用？手写和iPad还差亿点点</p>
+            <h3 class="item__title"><a href="https://www.bilibili.com/video/BV1A5411p7VB" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">Can a Windows <span class="nowrap">2-in-1</span> replace an iPad for handwriting?</a></h3>
+            <p class="item__meta">12K views</p>
+            <p class="item__note">A hands-on comparison of the YOGA C740 and iPad Pro 10.5.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="panel" role="tabpanel" id="panel-posts" aria-labelledby="tab-posts" tabindex="0" hidden>
+        <p class="panel__note">Short posts on <a href="https://www.xiaohongshu.com/user/profile/5ceab7210000000018028b55" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">my RedNote profile</a> (<span lang="zh-CN">小红书</span>), an Instagram-like social platform. The site may ask you to open the app.</p>
+        <div class="notes">
+          <article>
+            <a class="note" href="https://www.xiaohongshu.com/user/profile/5ceab7210000000018028b55" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note" aria-label="Open the AI writing comparison on RedNote">
+              <img src="img/xhs/ai-writing.webp" alt="" width="640" height="853" loading="lazy">
+              <span class="note__foot"><span>Image post</span><span>1,215 likes</span></span>
+            </a>
+            <p class="item__zh" lang="zh-CN">AI文笔对比！同行衬托下 DeepSeek 真的很牛</p>
+            <h3 class="item__title">AI writing, compared: DeepSeek stands out</h3>
+            <p class="item__note">How several AI models write, compared. DeepSeek came out on top.</p>
+          </article>
+          <article>
+            <a class="note" href="https://www.xiaohongshu.com/user/profile/5ceab7210000000018028b55" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note" aria-label="Open the handwriting comparison on RedNote">
+              <img class="is-wide" src="img/xhs/ipad-yoga.webp" alt="" width="640" height="480" loading="lazy">
+              <span class="note__foot"><span>Video</span><span>249 likes</span></span>
+            </a>
+            <p class="item__zh" lang="zh-CN">iPad Pro 和 win 二合一电脑 YOGA 手写体验对比</p>
+            <h3 class="item__title">Handwriting on an iPad Pro vs a Windows <span class="nowrap">2-in-1</span></h3>
+            <p class="item__note">The same comparison as the Bilibili video, made for RedNote.</p>
+          </article>
+          <article>
+            <a class="note" href="https://www.xiaohongshu.com/user/profile/5ceab7210000000018028b55" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note" aria-label="Open the productivity apps post on RedNote">
+              <img src="img/xhs/productivity-apps.webp" alt="" width="640" height="853" loading="lazy">
+              <span class="note__foot"><span>Video</span><span>35 likes</span></span>
+            </a>
+            <p class="item__zh" lang="zh-CN">吐血整理 8 款效率工具 APP，学生党必备</p>
+            <h3 class="item__title">Eight productivity apps, for RedNote</h3>
+            <p class="item__note">One topic, two platforms: the 52K-view video, retold for RedNote.</p>
+          </article>
+          <article>
+            <a class="note" href="#built" aria-label="See the 3D photo album on the Built page">
+              <img src="img/xhs/interstellar-album.webp" alt="" width="640" height="853" loading="lazy">
+              <span class="note__foot"><span>Video</span><span>27 likes</span></span>
+            </a>
+            <p class="item__zh" lang="zh-CN">让AI参考星际穿越帮我生成2025年度相册</p>
+            <h3 class="item__title">My 2025 photo album, inspired by Interstellar</h3>
+            <p class="item__note">The demo clip of my 3D project. See it on the Built page.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="panel" role="tabpanel" id="panel-articles" aria-labelledby="tab-articles" tabindex="0" hidden>
+        <section class="org" aria-labelledby="org-youth">
+          <div class="org__head">
+            <h2 class="org__name" id="org-youth">SYSU Youth <span lang="zh-CN">中大青年</span></h2>
+            <p class="org__what">Sun Yat-sen University's student new-media channel. I was Vice Head of its New Media Department.</p>
+          </div>
+          <div class="articles">
+            <article>
+              <a class="article__cover" href="https://mp.weixin.qq.com/s/KmFBWK6mnPSAoec2jkVR2A" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note" aria-label="Read the admission letter article on WeChat"><img src="img/wechat/KmFBWK6mnPSAoec2jkVR2A.jpg" alt="" loading="lazy"></a>
+              <p class="item__zh" lang="zh-CN">录取通知书这样设计，是想骗我再考一次大学？</p>
+              <h3 class="item__title"><a href="https://mp.weixin.qq.com/s/KmFBWK6mnPSAoec2jkVR2A" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">This admission letter is so well designed I'd take the exam again</a></h3>
+              <p class="item__meta">July 2018. Wrote and laid out.</p>
+            </article>
+            <article>
+              <a class="article__cover" href="https://mp.weixin.qq.com/s/-1gxRM18WW8aLvOkjPP6tw" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note" aria-label="Read the opinion piece on WeChat"><img src="img/wechat/1gxRM18WW8aLvOkjPP6tw.jpg" alt="" loading="lazy"></a>
+              <p class="item__zh" lang="zh-CN">被热点绑架的年轻人</p>
+              <h3 class="item__title"><a href="https://mp.weixin.qq.com/s/-1gxRM18WW8aLvOkjPP6tw" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">Young people held hostage by trending topics</a></h3>
+              <p class="item__meta">June 2018. Opinion piece. Wrote.</p>
+            </article>
+            <article>
+              <a class="article__cover" href="https://mp.weixin.qq.com/s/Q6QKPocph7RxGZ9Rjpxi5w" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note" aria-label="Read the SYSU app FAQ on WeChat"><img src="img/wechat/Q6QKPocph7RxGZ9Rjpxi5w.jpg" alt="" loading="lazy"></a>
+              <p class="item__zh" lang="zh-CN">中山大学APP的常见问题解答</p>
+              <h3 class="item__title"><a href="https://mp.weixin.qq.com/s/Q6QKPocph7RxGZ9Rjpxi5w" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">The SYSU app: answers to common questions</a></h3>
+              <p class="item__meta">February 2018. Wrote and laid out.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="org" aria-labelledby="org-sysu">
+          <div class="org__head">
+            <h2 class="org__name" id="org-sysu">Other SYSU accounts</h2>
+            <p class="org__what">A student club, my class, and the Student Affairs Office.</p>
+          </div>
+          <div class="articles">
+            <article>
+              <a class="article__cover" href="https://mp.weixin.qq.com/s/AVWwu6SgfVBVWYdxsliCRg" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note" aria-label="Read the blockchain talk article on WeChat"><img src="img/wechat/AVWwu6SgfVBVWYdxsliCRg.jpg" alt="" loading="lazy"></a>
+              <p class="item__zh" lang="zh-CN">中秋不回家+区块链讲座=有书拿？</p>
+              <h3 class="item__title"><a href="https://mp.weixin.qq.com/s/AVWwu6SgfVBVWYdxsliCRg" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">Staying on campus for Mid-Autumn? Come to a blockchain talk</a></h3>
+              <p class="item__meta">SYSU Blockchain Club, September 2018. Wrote and laid out.</p>
+            </article>
+            <article>
+              <a class="article__cover" href="https://mp.weixin.qq.com/s/iyR3NlE5iAZziJQRSFumeQ" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note" aria-label="Read the class birthday article on WeChat"><img src="img/wechat/iyR3NlE5iAZziJQRSFumeQ.jpg" alt="" loading="lazy"></a>
+              <p class="item__zh" lang="zh-CN">国庆节来临+展四生日会=好好学习小礼包？</p>
+              <h3 class="item__title"><a href="https://mp.weixin.qq.com/s/iyR3NlE5iAZziJQRSFumeQ" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">A class birthday party and a study gift pack for the October holiday</a></h3>
+              <p class="item__meta">Class account, September 2018. Wrote and laid out.</p>
+            </article>
+            <article>
+              <a class="article__cover" href="https://mp.weixin.qq.com/s/1Yswlrq3hsUrXNnkJHgFAw" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note" aria-label="Read the Student Affairs Q&amp;A on WeChat"><img src="img/wechat/1Yswlrq3hsUrXNnkJHgFAw.jpg" alt="" loading="lazy"></a>
+              <p class="item__zh" lang="zh-CN">猪猪有话说（三）</p>
+              <h3 class="item__title"><a href="https://mp.weixin.qq.com/s/1Yswlrq3hsUrXNnkJHgFAw" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">Student Affairs Q&amp;A, part 3</a></h3>
+              <p class="item__meta">Student Affairs Office, September 2018. Laid out.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="org" aria-labelledby="org-ican">
+          <div class="org__head">
+            <h2 class="org__name" id="org-ican">iCAN <span lang="zh-CN">搜技能</span></h2>
+            <p class="org__what">A student startup for skill videos. I ran its WeChat account and planned online campaigns that gained 1,000+ followers.</p>
+          </div>
+          <div class="articles">
+            <article>
+              <a class="article__cover" href="https://mp.weixin.qq.com/s/1B6vfrY5b9O5qwkOSE5tPg" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note" aria-label="Read the retro style article on WeChat"><img src="img/wechat/1B6vfrY5b9O5qwkOSE5tPg.jpg" alt="" loading="lazy"></a>
+              <p class="item__zh" lang="zh-CN">搜EASY | 不来点复古风怎么好意思过春夏</p>
+              <h3 class="item__title"><a href="https://mp.weixin.qq.com/s/1B6vfrY5b9O5qwkOSE5tPg" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">Why spring needs a little retro style</a></h3>
+              <p class="item__meta">May 2018. Wrote.</p>
+            </article>
+            <article>
+              <a class="article__cover" href="https://mp.weixin.qq.com/s/xp9Y-31puGKUi2_-inHQjg" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note" aria-label="Read the campus iCON article on WeChat"><img src="img/wechat/xp9Y-31puGKUi2_-inHQjg.jpg" alt="" loading="lazy"></a>
+              <p class="item__zh" lang="zh-CN">校园iCON | 高小鱼：我吃得超开心</p>
+              <h3 class="item__title"><a href="https://mp.weixin.qq.com/s/xp9Y-31puGKUi2_-inHQjg" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">Campus iCON: Gao Xiaoyu</a></h3>
+              <p class="item__meta">May 2018. Laid out.</p>
+            </article>
+            <article>
+              <a class="article__cover" href="https://mp.weixin.qq.com/s/c_NMDJKYMRJYhFxlNwXyoQ" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note" aria-label="Read the giveaway post on WeChat"><img src="img/wechat/c_NMDJKYMRJYhFxlNwXyoQ.jpg" alt="" loading="lazy"></a>
+              <p class="item__zh" lang="zh-CN">真实抽奖 | 释放你的购物欲望</p>
+              <h3 class="item__title"><a href="https://mp.weixin.qq.com/s/c_NMDJKYMRJYhFxlNwXyoQ" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">Two giveaway campaigns</a></h3>
+              <p class="item__meta">May 2018. Wrote. <a href="https://mp.weixin.qq.com/s/Es0xmlS2WWpbZ-3Sb1AW1w" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">Second post</a></p>
+            </article>
+          </div>
+        </section>
+
+        <details class="more">
+          <summary>Other writing (2 accounts)</summary>
+          <ul>
+            <li>A five-part industry series on Nansha, Guangzhou, for <span lang="zh-CN">寰奥集团</span>: <a href="https://mp.weixin.qq.com/s/83RVZ9lGnRztkuMKDN-hCg" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">1</a>, <a href="https://mp.weixin.qq.com/s/QKeF0T6lsN4haxZLWkf67w" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">2</a>, <a href="https://mp.weixin.qq.com/s/p2Cx7owXkzEOPzBxHfK6uA" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">3</a>, <a href="https://mp.weixin.qq.com/s/knslSh-ANslsFp_9W-2drg" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">4</a>, <a href="https://mp.weixin.qq.com/s/LYZDtqVEEXu9nXWn3cfuKA" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">5</a>. Wrote and laid out.</li>
+            <li><a href="https://mp.weixin.qq.com/s/Ub4Wyp6AbefOg1cHazbKKQ" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">A weekly note</a> for Tianfeng Securities' internet and media research team, as an intern. Wrote and laid out.</li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="panel" role="tabpanel" id="panel-posters" aria-labelledby="tab-posters" tabindex="0" hidden>
+        <p class="panel__note">Phone poster templates I designed as a contract designer for MAKA, a Canva-like design platform: daily mood cards, study posters for tutoring centers, and wedding photo promotions.</p>
+        <ul class="posters">
+          <li><img src="img/posters/poster-06.png" alt="Mood card: sunset silhouette, dated 08/14" width="219" height="385" loading="lazy"></li>
+          <li><img src="img/posters/poster-12.png" alt="Study poster: orange type with a jumping figure" width="219" height="385" loading="lazy"></li>
+          <li><img src="img/posters/poster-02.png" alt="Wedding photo promotion by the sea" width="229" height="402" loading="lazy"></li>
+          <li><img src="img/posters/poster-08.png" alt="Mood card: hand reaching for the moon" width="219" height="385" loading="lazy"></li>
+          <li><img src="img/posters/poster-14.png" alt="Study poster: stacked books with yellow type" width="219" height="385" loading="lazy"></li>
+          <li><img src="img/posters/poster-03.png" alt="Wedding promotion with vertical Chinese type on green" width="229" height="402" loading="lazy"></li>
+          <li><img src="img/posters/poster-15.png" alt="Pink and mint good-morning card with an alarm clock" width="218" height="384" loading="lazy"></li>
+          <li><img src="img/posters/poster-07.png" alt="Mood card: desert road, dated 08/13" width="219" height="385" loading="lazy"></li>
+          <li><img src="img/posters/poster-11.png" alt="Study poster: black with bold yellow type and a pen" width="219" height="385" loading="lazy"></li>
+          <li><img src="img/posters/poster-04.png" alt="Wedding promotion with a garden photo" width="229" height="402" loading="lazy"></li>
+          <li><img src="img/posters/poster-09.png" alt="Mood card: silhouette on rocks with birds" width="219" height="385" loading="lazy"></li>
+          <li><img src="img/posters/poster-13.png" alt="Study poster: climber on a cliff" width="219" height="385" loading="lazy"></li>
+          <li><img src="img/posters/poster-05.png" alt="Wedding promotion with a beach photo" width="229" height="402" loading="lazy"></li>
+          <li><img src="img/posters/poster-10.png" alt="Mood card: calm sea at dusk" width="219" height="385" loading="lazy"></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Built -->
+    <section class="view wrap" id="built" data-view="built" aria-labelledby="built-title" hidden>
+      <h1 class="view__title" id="built-title" tabindex="-1">Built</h1>
+      <p class="view__intro">Things I made for the browser.</p>
+
+      <article class="project" aria-labelledby="p-album">
+        <div class="stage">
+          <iframe data-src="https://player.bilibili.com/player.html?bvid=BV1KwigBbE4J&amp;autoplay=0&amp;danmaku=0&amp;high_quality=1" title="Demo clip of the Interstellar photo album" allow="fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+        <div>
+          <p class="project__kicker">Personal project, December 2025</p>
+          <h2 class="project__title" id="p-album">Interstellar photo album</h2>
+          <p class="project__body">A 3D timeline of my 2025 photos, inspired by the tesseract scene in Interstellar. Open or close your hand in front of the camera to move along it. I built it with AI assistance.</p>
+          <p class="project__stack">React, Three.js, MediaPipe hand tracking, Google AI Studio</p>
+          <div class="project__links">
+            <a class="button" href="https://github.com/leah2020/-3D-" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">View the code</a>
+            <a class="button button--quiet" href="https://www.bilibili.com/video/BV1KwigBbE4J" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">Watch on Bilibili</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project" aria-labelledby="p-whisker">
+        <div class="browser">
+          <div class="browser__bar"><span class="browser__dots" aria-hidden="true"><i></i><i></i><i></i></span><span>Whisker Watch</span></div>
+          <div class="browser__view">
+            <img src="img/whisker-watch.jpg" alt="Whisker Watch landing page for a cat-sitting service, with a Request a visit button" width="1280" height="800" loading="lazy">
+          </div>
+        </div>
+        <div>
+          <p class="project__kicker">Course project, INFO 6150 Web Design and User Experience Engineering, Fall 2026</p>
+          <h2 class="project__title" id="p-whisker">Whisker Watch</h2>
+          <p class="project__body">INFO 6150 taught me the basics of web design, from layout, color, and typography to forms and motion, and how to build them with semantic HTML, CSS, and JavaScript. Whisker Watch, a landing page with a request form, is one of my assignments.</p>
+          <p class="project__stack">HTML, CSS, JavaScript</p>
+        </div>
+      </article>
+
+      <ul class="small-builds">
+        <li>
+          <h3>Workflow automation at Huatai</h3>
+          <p>AI-assisted Python scripts that automated repetitive work for 180+ fund products and cut manual workload by 50%. Internal tool, so there is no public code.</p>
+        </li>
+        <li>
+          <h3>Investor sentiment index</h3>
+          <p>A Python pipeline that collected and cleaned 2M+ stock forum comments and turned them into a daily sentiment index. Course project, 98/100.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- About -->
+    <section class="view wrap" id="about" data-view="about" aria-labelledby="about-title" hidden>
+      <h1 class="view__title" id="about-title" tabindex="-1">About</h1>
+      <p class="view__intro">I studied finance, spent three years researching funds, and kept making content on the side. Now I'm studying information systems to build the tools behind it.</p>
+
+      <section class="about-sec" aria-labelledby="b-skills">
+        <h2 class="about-sec__title" id="b-skills">Skills</h2>
+        <ul class="skillgrid">
+          <li class="skill skill--video">
+            <span class="skill__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5 21 7.5v9l-5-3z"/></svg></span>
+            <h3 class="skill__name">Video</h3>
+            <p class="skill__what">Plan, film, and edit review videos. My top video has 64K views.</p>
+            <ul class="chips" aria-label="Video skills"><li>Scripting</li><li>Filming</li><li>Editing</li></ul>
+          </li>
+          <li class="skill skill--writing">
+            <span class="skill__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg></span>
+            <h3 class="skill__name">Writing and layout</h3>
+            <p class="skill__what">WeChat articles for student media, clubs, and a startup, from FAQs to opinion pieces.</p>
+            <ul class="chips" aria-label="Writing skills"><li>Explainers</li><li>Campaign copy</li><li>Article layout</li></ul>
+          </li>
+          <li class="skill skill--design">
+            <span class="skill__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.7-.8 1.7-1.6 0-1.3-1.2-1.6-1.2-2.7 0-.9.7-1.5 1.6-1.5H16a5 5 0 0 0 5-5c0-4-4-7.2-9-7.2z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></svg></span>
+            <h3 class="skill__name">Design</h3>
+            <p class="skill__what">Contract designer for MAKA, a Canva-like design platform: phone poster templates for its marketplace. Also article covers and layouts.</p>
+            <ul class="chips" aria-label="Design tools"><li>Canva</li><li>Figma</li><li>Adobe Creative Suite</li><li>MAKA</li></ul>
+          </li>
+          <li class="skill skill--web">
+            <span class="skill__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg></span>
+            <h3 class="skill__name">Web</h3>
+            <p class="skill__what">Responsive pages from my web design course, and a 3D web app made with AI assistance.</p>
+            <ul class="chips" aria-label="Web skills"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>React</li><li>Three.js</li></ul>
+          </li>
+          <li class="skill skill--data">
+            <span class="skill__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 20h18M6.5 20v-7M11.5 20V5M16.5 20v-10"/></svg></span>
+            <h3 class="skill__name">Data</h3>
+            <p class="skill__what">Automation, models, and research charts from three years in fund research.</p>
+            <ul class="chips" aria-label="Data tools"><li>Python</li><li>Excel and VBA</li><li>Power Query</li><li>SAS</li><li>Stata</li><li>R</li></ul>
+          </li>
+          <li class="skill skill--lang">
+            <span class="skill__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.2 3.2 3.2 14.8 0 18M12 3c-3.2 3.2-3.2 14.8 0 18"/></svg></span>
+            <h3 class="skill__name">Languages</h3>
+            <p class="skill__what">I write in both, and explain Chinese work to English readers.</p>
+            <ul class="chips" aria-label="Languages"><li>English, fluent</li><li>Mandarin, native</li></ul>
+          </li>
+        </ul>
+      </section>
+
+      <section class="about-sec" aria-labelledby="b-path">
+        <h2 class="about-sec__title" id="b-path">Education and work</h2>
+        <ul class="cards">
+          <li class="card card--edu">
+            <p class="card__type">Education</p>
+            <h3 class="card__name">Northeastern University</h3>
+            <p class="card__role">MS in Information Systems, Silicon Valley campus</p>
+            <p class="card__when">2026 – 2028, expected</p>
+          </li>
+          <li class="card card--work">
+            <p class="card__type">Work</p>
+            <h3 class="card__name">Huatai Securities Asset Management</h3>
+            <p class="card__role">Fund-of-funds researcher, Shanghai</p>
+            <p class="card__when">2023 – 2026</p>
+          </li>
+          <li class="card card--edu">
+            <p class="card__type">Education</p>
+            <h3 class="card__name">Renmin University of China</h3>
+            <p class="card__role">Master of Finance, FinTech. GPA 3.97/4.00</p>
+            <p class="card__when">2021 – 2023</p>
+          </li>
+          <li class="card card--edu">
+            <p class="card__type">Education</p>
+            <h3 class="card__name">Sun Yat-sen University</h3>
+            <p class="card__role">B.Econ in Finance. Vice Head of New Media, SYSU Youth</p>
+            <p class="card__when">2017 – 2021</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="about-sec" aria-labelledby="b-intern">
+        <h2 class="about-sec__title" id="b-intern" data-hue="intern">Internships</h2>
+        <ul class="cards">
+          <li class="card card--intern"><p class="card__when">2022</p><h3 class="card__name">China Merchants Securities Research Institute</h3><p class="card__role">Fund research. Built 100+ charts for research reports.</p></li>
+          <li class="card card--intern"><p class="card__when">2022</p><h3 class="card__name">ICBC Credit Suisse Asset Management</h3><p class="card__role">FOF investment. A 30+ factor fund screening model in Python.</p></li>
+          <li class="card card--intern"><p class="card__when">2022</p><h3 class="card__name">China Chengxin Index Service</h3><p class="card__role">Quantitative and asset allocation research.</p></li>
+          <li class="card card--intern"><p class="card__when">2021 – 2022</p><h3 class="card__name">GF Fund Management</h3><p class="card__role">Product design. Automated weekly reports with Python and VBA.</p></li>
+          <li class="card card--intern"><p class="card__when">2021</p><h3 class="card__name">Tianfeng Securities Research Institute</h3><p class="card__role">Equity research, internet and media.</p></li>
+          <li class="card card--intern"><p class="card__when">2021</p><h3 class="card__name">CITIC Securities</h3><p class="card__role">IPO project, financial institutions group.</p></li>
+          <li class="card card--intern"><p class="card__when">2020 – 2021</p><h3 class="card__name">NetEase Interactive Entertainment</h3><p class="card__role">Platform product operations. Grew a user community from 90+ to 800+.</p></li>
+          <li class="card card--intern"><p class="card__when">2020</p><h3 class="card__name">Beijing Liwushuo Technology</h3><p class="card__role">New consumer product R&amp;D.</p></li>
+        </ul>
+      </section>
+
+      <div class="about-split">
+        <section class="about-sec" aria-labelledby="b-projects">
+          <h2 class="about-sec__title" id="b-projects" data-hue="project">Projects</h2>
+          <ul class="cards cards--stack">
+            <li class="card card--project"><p class="card__when">2022</p><h3 class="card__name">Tencent Smart Retail project</h3><p class="card__role">Data analyst. A sales-forecasting model for an F&amp;B brand, R² above 0.7.</p></li>
+            <li class="card card--project"><p class="card__when">2021</p><h3 class="card__name">NLP investor sentiment index</h3><p class="card__role">2M+ forum comments in Python. Course project, 98/100.</p></li>
+            <li class="card card--project"><p class="card__when">2021</p><h3 class="card__name">79-factor A-share strategy</h3><p class="card__role">SAS. Backtested Sharpe ratio of 1.5. Course project, 93/100.</p></li>
+          </ul>
+        </section>
+
+        <section class="about-sec" aria-labelledby="b-papers">
+          <h2 class="about-sec__title" id="b-papers" data-hue="paper">Papers</h2>
+          <ul class="cards cards--stack">
+            <li class="card card--paper">
+              <p class="card__when">2026, third author</p>
+              <h3 class="card__name">Bank digital transformation and risk-taking: Evidence from China</h3>
+              <p class="card__role">Song, K., Ren, X., <strong>Li, L.</strong>, &amp; Xu, Z. <em>Pacific-Basin Finance Journal</em>, 98, 103081.</p>
+            </li>
+            <li class="card card--paper">
+              <p class="card__when">2023, fourth author</p>
+              <h3 class="card__name">Industrial robot application and employment: Evidence from enterprise survey</h3>
+              <p class="card__role">Chen, L., Zhang, Y., Lin, J., &amp; <strong>Li, L.</strong> <em>Statistical Research</em>, (7).</p>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <a class="footer__email" href="mailto:li.lany@northeastern.edu">li.lany@northeastern.edu</a>
+      <ul class="footer__links" aria-label="Profiles">
+        <li><a href="https://www.linkedin.com/in/laney10" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">LinkedIn</a></li>
+        <li><a href="https://github.com/leah2020" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">GitHub</a></li>
+        <li><a href="https://space.bilibili.com/265654686" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">Bilibili</a></li>
+        <li><a href="https://www.xiaohongshu.com/user/profile/5ceab7210000000018028b55" target="_blank" rel="noopener noreferrer" aria-describedby="newtab-note">RedNote</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Screen-reader note for every link that leaves the site (aria-describedby="newtab-note") -->
+  <span id="newtab-note" hidden>Opens in a new tab</span>
+</body>
+</html>
